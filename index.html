@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID HAck CTH | Cyber Security Protocol</title>
+    <style>
+        :root {
+            --glow: #bc13fe;
+            --cyan: #00f2ff;
+            --bg: #020005;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ১. ব্যাকগ্রাউন্ডে সাইবার ম্যাপ ট্র্যাকিং গিফ */
+        #map-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: url('https://media.giphy.com/media/MmNS0GiYJf7rx8cZHO/giphy.gif') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        /* স্ক্যানলাইন ইফেক্ট */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            z-index: -1;
+        }
+
+        header {
+            margin-top: 15px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .tool-title {
+            font-size: 2.2rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 15px var(--glow);
+            font-weight: 900;
+        }
+
+        /* হোম প্যানেল */
+        #home-panel {
+            margin-top: 20px;
+            text-align: center;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border: 1px solid var(--glow);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .home-logo {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px var(--cyan);
+        }
+
+        input {
+            width: 100%; padding: 12px;
+            background: #000; border: 1px solid var(--glow);
+            color: var(--cyan); text-align: center; outline: none;
+            margin-bottom: 15px;
+        }
+
+        .btn-launch {
+            background: var(--glow); color: #fff;
+            border: none; padding: 10px 30px;
+            font-weight: bold; cursor: pointer;
+            text-transform: uppercase; border-radius: 5px;
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        /* ৪ বক্স সিস্টেম */
+        #main-grid {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 95%;
+            max-width: 900px;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        .box {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--glow);
+            height: 180px;
+            padding: 10px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .box h4 { font-size: 10px; color: var(--cyan); margin-bottom: 5px; border-bottom: 1px solid #333; }
+
+        .box img { width: 60px; margin-top: 10px; }
+
+        /* লোডিং বার */
+        .loading-container {
+            display: none;
+            width: 90%; max-width: 900px;
+            margin-top: 20px; z-index: 10;
+            text-align: center;
+        }
+
+        .progress-wrapper {
+            width: 100%; height: 30px;
+            background: #111; border: 1px solid var(--glow);
+            position: relative; overflow: hidden;
+        }
+
+        #progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--glow), var(--cyan));
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        #percentage-text {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold; color: #fff;
+        }
+
+        /* ক্রেডিট */
+        footer {
+            position: fixed; bottom: 10px; z-index: 10;
+        }
+
+        .credit-name {
+            color: var(--cyan); font-weight: bold;
+            padding: 5px 15px; border: 1px solid var(--glow);
+            border-radius: 20px; background: rgba(188, 19, 254, 0.2);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        /* প্র্যাঙ্ক স্ক্রিন */
+        #prank-screen {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 1000;
+            flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        #prank-screen img { width: 90%; max-width: 500px; border: 4px solid var(--glow); }
+        .boka-title { font-size: 4rem; color: #ff0055; text-shadow: 0 0 30px #ff0055; margin-top: 20px; }
+    </style>
+    <link href="https://media.giphy.com/media/dl8b48ULQRjBkRcmZZ/giphy.gif:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="map-bg"></div>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="tool-title">ID HAck CTH</div>
+        <p style="color: var(--cyan); font-size: 10px; letter-spacing: 3px;">SHADOW JOKER PROTOCOL</p>
+    </header>
+
+    <div id="home-panel">
+        <img src="https://media.giphy.com/media/dl8b48ULQRjBkRcmZZ/giphy.gif" class="home-logo">
+        <input type="text" id="fb-link" placeholder="TARGET PROFILE LINK">
+        <br>
+        <button class="btn-launch" onclick="initiateHack()">Initialize Hack</button>
+    </div>
+
+    <div id="main-grid">
+        <div class="box">
+            <h4>NETWORK STATUS</h4>
+            <img src="https://media.giphy.com/media/115BJle6N2Av0A/giphy.gif">
+            <p style="font-size: 8px; color: var(--cyan); margin-top: 5px;">Establishing Proxy...</p>
+        </div>
+        <div class="box">
+            <h4>FOOTPRINT SCAN</h4>
+            <img src="https://media.giphy.com/media/rzrF4bm9nDMdu47z3M/giphy.gif">
+            <p style="font-size: 8px; color: #fff; margin-top: 5px;">Analyzing metadata...</p>
+        </div>
+        <div class="box">
+            <h4>KERNEL EXPLOIT</h4>
+            <img src="https://media.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.gif" style="width: 80px;">
+            <div id="fake-logs" style="font-size: 7px; color: #00ff41; text-align: left; margin-top: 5px;"></div>
+        </div>
+        <div class="box">
+            <h4>GEO LOCATION</h4>
+            <div id="geo-info" style="font-size: 9px; color: #ffcc00; margin-top: 20px;">
+                TRACING TARGET IP...<br>LOCATING ISP NODES...
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-container" id="loader-area">
+        <div class="progress-wrapper">
+            <div id="progress-fill"></div>
+            <div id="percentage-text">0%</div>
+        </div>
+        <p style="margin-top: 10px; font-size: 10px; color: var(--cyan);">PWNING DATABASE... DO NOT REFRESH</p>
+    </div>
+
+    <div id="prank-screen">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyMWxlZnR5aGh0M3pxc3lpOHprYmM4aXZhbnh4MXBheHBmY3RhbzlzbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Fu3OjBQiCs3s0ZuLY3/giphy.gif">
+        <div class="boka-title">বোকা চন্দ্র!</div>
+        <p style="color: var(--cyan); letter-spacing: 5px;">Pwned by Cyber Team Help</p>
+    </div>
+
+    <footer>
+        CREATED BY <span class="credit-name">SHADOW JOKER</span>
+    </footer>
+
+    <script>
+        function initiateHack() {
+            const link = document.getElementById('fb-link').value;
+            if(!link) return alert("Target missing!");
+
+            document.getElementById('home-panel').style.display = 'none';
+            document.getElementById('main-grid').style.display = 'grid';
+            document.getElementById('loader-area').style.display = 'block';
+
+            let progress = 0;
+            const fill = document.getElementById('progress-fill');
+            const pText = document.getElementById('percentage-text');
+
+            const timer = setInterval(() => {
+                progress += 0.1;
+                if(progress >= 100) {
+                    progress = 100;
+                    clearInterval(timer);
+                    setTimeout(() => { document.getElementById('prank-screen').style.display = 'flex'; }, 1000);
+                }
+                fill.style.width = progress + '%';
+                pText.innerText = Math.floor(progress) + '%';
+            }, 120); // ২ মিনিট সিমুলেশন
+
+            // বক্স ৩ এর ফেক লগ
+            setInterval(() => {
+                const logs = ["> Accessing Port 80", "> Handshake OK", "> Payload Sent", "> Root Granted"];
+                document.getElementById('fake-logs').innerText = logs[Math.floor(Math.random()*logs.length)];
+            }, 2000);
+
+            // বক্স ৪ এর ফেক লোকেশন
+            setInterval(() => {
+                document.getElementById('geo-info').innerHTML = `IP: 103.${Math.floor(Math.random()*255)}.12.1<br>CITY: DHAKA<br>ENC: WPA2-AES`;
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
